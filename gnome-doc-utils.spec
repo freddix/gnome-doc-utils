@@ -1,7 +1,7 @@
 Summary:	Documentation utilities for GNOME
 Name:		gnome-doc-utils
 Version:	0.20.6
-Release:	2
+Release:	3
 License:	GPL v2+/LGPL v2+
 Group:		Development/Tools
 Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-doc-utils/0.20/%{name}-%{version}.tar.bz2
@@ -28,11 +28,14 @@ Collection of documentation utilities for GNOME.
 %patch0 -p1
 
 %build
+rm aclocal.m4
 %{__intltoolize}
-%{__aclocal} -I tools
+%{__aclocal} -I tools -I m4
 %{__automake}
 %{__autoconf}
 %configure \
+	--build=%{_host}	\
+	--host=%{_host}		\
 	--disable-scrollkeeper
 %{__make} -j1
 
